@@ -26,6 +26,7 @@ def verify_exists_txt(TXT):
 
 def remove_txt(TXT):
     if verify_exists_txt(TXT):
+        print('a')
         os.remove(TXT)
 
 def write_txt(line, problem, content):
@@ -105,26 +106,26 @@ def create_list_worksheet2():
         info_list.append([client, initials])
     return info_list
 
-def total_by_account():
+def total_by_account(LIST_WORKSHEET_1, LIST_WORKSHEET_2):
     accounts = {}
-    for account in create_list_worksheet2():
+    for account in LIST_WORKSHEET_2:
         accounts[account[1]] = 0
     
-    for info in create_list_worksheet1():
+    for info in LIST_WORKSHEET_1:
         accounts[info[2]] += info[1]
 
     return accounts
 
-def total_by_person():
+def total_by_person(LIST_WORKSHEET_1, LIST_WORKSHEET_2):
     persons_account = {}
     persons_value = {}
-    for person in create_list_worksheet2():
+    for person in LIST_WORKSHEET_2:
         if persons_account.get(person[0]):
             persons_account[person[0]].append(person[1])
         else:
             persons_account[person[0]] = [person[1]]
     for person, accounts in persons_account.items():    
-        for account, value in total_by_account().items():
+        for account, value in total_by_account(LIST_WORKSHEET_1, LIST_WORKSHEET_2).items():
             if account in accounts:
                 try:
                     persons_value[person] += value
@@ -132,9 +133,9 @@ def total_by_person():
                     persons_value[person] = value 
     return persons_value
 
-def total_by_date():
+def total_by_date(LIST_WORKSHEET_1):
     balance_by_date = {}
-    for date in create_list_worksheet1():
+    for date in LIST_WORKSHEET_1:
         if balance_by_date.get(date[0]):
             balance_by_date[date[0]] += date[1]
         else:
@@ -155,11 +156,14 @@ def print_menu():
     """)
 
 def main():
+    remove_txt(TXT)
     BALANCE_BY_PERSON = 1
     BALANCE_BY_ACCOUNT = 2
     BALANCE_BY_DATE = 3
     EXIT = 4
     choice = 0
+    LIST_WORKSHEET_1 = create_list_worksheet1()
+    LIST_WORKSHEET_2 = create_list_worksheet2()
     while True:
         print_menu()
         choice = int(input())
@@ -167,15 +171,12 @@ def main():
             break
 
         if choice == BALANCE_BY_PERSON:
-            remove_txt(TXT)
-            print_dictionary(total_by_person())
+            print_dictionary(total_by_person(LIST_WORKSHEET_1, LIST_WORKSHEET_2))
         
         elif choice == BALANCE_BY_ACCOUNT:
-            remove_txt(TXT)  
-            print_dictionary(total_by_account())
+            print_dictionary(total_by_account(LIST_WORKSHEET_1, LIST_WORKSHEET_2))
         
         elif choice == BALANCE_BY_DATE:
-            remove_txt(TXT)
-            print_dictionary(total_by_date())
+            print_dictionary(total_by_date(LIST_WORKSHEET_1))
 if __name__ == '__main__':
     main()
