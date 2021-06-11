@@ -2,7 +2,6 @@ import xlrd
 import os
 import datetime
 
-teste_git_flow = True
 
 FILENAME = 'sheet_money.xlsx'
 PATH = os.path.abspath(FILENAME)
