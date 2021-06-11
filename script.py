@@ -11,8 +11,8 @@ def main():
     BALANCE_BY_DATE = 3
     EXIT = 4
     choice = 0
-    LIST_WORKSHEET_1 = create_list_worksheet_records()
-    LIST_WORKSHEET_2 = create_list_worksheet_accounts()
+    LIST_WORKSHEET_RECORDS = create_list_worksheet_records()
+    LIST_WORKSHEET_ACCOUNTS = create_list_worksheet_accounts()
     while True:
         print_menu()
         choice = int(input())
@@ -20,12 +20,12 @@ def main():
             break
 
         if choice == BALANCE_BY_PERSON:
-            print_dictionary(total_by_person(LIST_WORKSHEET_1, LIST_WORKSHEET_2))
+            print_dictionary(total_by_person(LIST_WORKSHEET_RECORDS, LIST_WORKSHEET_ACCOUNTS))
         
         elif choice == BALANCE_BY_ACCOUNT:
-            print_dictionary(total_by_account(LIST_WORKSHEET_1, LIST_WORKSHEET_2))
+            print_dictionary(total_by_account(LIST_WORKSHEET_RECORDS, LIST_WORKSHEET_ACCOUNTS))
         
         elif choice == BALANCE_BY_DATE:
-            print_dictionary(total_by_date(LIST_WORKSHEET_1))
+            print_dictionary(total_by_date(LIST_WORKSHEET_RECORDS))
 if __name__ == '__main__':
     main()
