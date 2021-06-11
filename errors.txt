@@ -1,0 +1,12 @@
+Line 5
+Has no value
+08/07/19  CCA  
+
+Line 11
+Has no account
+30/05/20 150.0   
+
+Line 12
+Has no account
+30/05/20 180.0   
+
