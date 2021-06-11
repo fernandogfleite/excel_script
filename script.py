@@ -22,6 +22,10 @@ def verify_exists_txt(TXT):
         return True
     return False
 
+def remove_txt(TXT):
+    if verify_exists_txt(TXT):
+        os.remove(TXT)
+
 def write_txt(line, problem, content):
     file = None
     contentTXT = []
@@ -126,6 +130,15 @@ def total_by_person():
                     persons_value[person] = value 
     return persons_value
 
+def total_by_date():
+    balance_by_date = {}
+    for date in create_list_worksheet1():
+        if balance_by_date.get(date[0]):
+            balance_by_date[date[0]] += date[1]
+        else:
+            balance_by_date[date[0]] = date[1]
+    return balance_by_date
+
 def print_dictionary(dictionary):
     for key, value in dictionary.items():
         print(f'{key}: R${value}')
@@ -135,13 +148,15 @@ def print_menu():
     Escolha uma das opções abaixo
     1 - Saldo total por cliente
     2 - Saldo total por conta
-    3 - Sair
+    3 - Saldo por data
+    4 - Sair
     """)
 
 def main():
     BALANCE_BY_PERSON = 1
     BALANCE_BY_ACCOUNT = 2
-    EXIT = 3
+    BALANCE_BY_DATE = 3
+    EXIT = 4
     choice = 0
     while True:
         print_menu()
@@ -150,14 +165,15 @@ def main():
             break
 
         if choice == BALANCE_BY_PERSON:
-            if verify_exists_txt(TXT):
-                os.remove(TXT)
+            remove_txt(TXT)
             print_dictionary(total_by_person())
         
         elif choice == BALANCE_BY_ACCOUNT:
-            if verify_exists_txt(TXT):
-                os.remove(TXT)
+            remove_txt(TXT)  
             print_dictionary(total_by_account())
-
+        
+        elif choice == BALANCE_BY_DATE:
+            remove_txt(TXT)
+            print_dictionary(total_by_date())
 if __name__ == '__main__':
     main()
