@@ -142,6 +142,8 @@ def total_by_date(LIST_WORKSHEET_1):
             balance_by_date[date[0]] = date[1]
     return balance_by_date
 
+
+
 def print_dictionary(dictionary):
     for key, value in dictionary.items():
         print(f'{key}: R${value}')
